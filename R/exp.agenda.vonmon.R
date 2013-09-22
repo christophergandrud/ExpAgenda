@@ -26,7 +26,7 @@ exp.agenda.vonmon <- function(term.doc, authors, n.cats, verbose = TRUE, kappa =
     return(out)
   }
   
-  N<- nrow(authors)
+  N <- nrow(authors)
   
   ##component labels
   taus<- matrix(NA, nrow=nrow(term.doc), ncol=n.cats)
