@@ -2,14 +2,16 @@ Package: ExpAgenda
 Title: Bayesian hierarchical expressed agenda estimation
 Version: 0.1
 Date: 2013-09-22
-Author: Justin Grimmer and Christopher Gandrud 
+Author: Justin Grimmer and Christopher Gandrud
 Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>
 BugReports: https://github.com/christophergandrud/ExpAgenda/issues
-Description: A bayesian hierarchical topic model for texts. The package implements Grimmer (2010).
+Description: A bayesian hierarchical topic model for texts. The package
+    implements Grimmer (2010).
 License: GPL (>= 3)
 Depends:
     R (>= 3.0.0)
 Imports:
-	MCMCpack
-Collage:
-	'exp.agenda.vonmon.R'
+    MCMCpack
+Collage: 'exp.agenda.vonmon.R'
+Collate:
+    'exp.agenda.vonmon.R'

@@ -26,8 +26,6 @@ exp.agenda.vonmon <- function(term.doc, authors, n.cats, verbose = TRUE, kappa =
     return(out)
   }
   
-  n.cats<- n.cats
-  require(MCMCpack)
   N<- nrow(authors)
   
   ##component labels
@@ -52,8 +50,7 @@ exp.agenda.vonmon <- function(term.doc, authors, n.cats, verbose = TRUE, kappa =
   for(j in 1:N){
     pis[j,]<- thetas + (authors[j,2] - authors[j, 1])/n.cats
   }
-  
-  
+   
   kappa<- kappa
   k<-0
   prior<- 1
@@ -75,7 +72,6 @@ exp.agenda.vonmon <- function(term.doc, authors, n.cats, verbose = TRUE, kappa =
     
     part1<- kappa*term.doc%*%mus
     
-    
     for(j in 1:N){
       for(k in authors[j,1]:authors[j,2]){
         temp<- part1[k,] - max(part1[k,])
@@ -84,12 +80,10 @@ exp.agenda.vonmon <- function(term.doc, authors, n.cats, verbose = TRUE, kappa =
       }
     }
     
-    
-    
     ## 
     ##
-    mus<- matrix(1/sqrt(ncol(term.doc)), nrow=nrow(mus), ncol=n.cats)
-    m<- 0
+    mus <- matrix(1/sqrt(ncol(term.doc)), nrow=nrow(mus), ncol=n.cats)
+    m <- 0
     
     
     for(j in 1:N){
@@ -109,14 +103,14 @@ exp.agenda.vonmon <- function(term.doc, authors, n.cats, verbose = TRUE, kappa =
     
     ##this is the Newton-Raphson algorithm from 
     ##Blei, Ng, and Jordan (2003)
-    alpha<- thetas[1,]
+    alpha <- thetas[1,]
     ##and we know that the log
-    N1<- N
-    te<- log(exp.pi)
-    suff.stats<- apply(te, 2, sum)/N1
-    k<-0
-    a<- 0
-    while(k==0){
+    N1 <- N
+    te <- log(exp.pi)
+    suff.stats <- apply(te, 2, sum)/N1
+    k <- 0
+    a <- 0
+    while(k == 0){
       sum.alpha<- digamma(sum(alpha))
       di.alph<- digamma(alpha)
       grads<- Bayes*prior + N1*(sum.alpha - di.alph + suff.stats)
@@ -148,7 +142,6 @@ exp.agenda.vonmon <- function(term.doc, authors, n.cats, verbose = TRUE, kappa =
     }
     
     thetas[1,]<- alpha
-    
     
     sen.list<- list()
     for(j in 1:N){
