@@ -12,6 +12,5 @@ Depends:
     R (>= 3.0.0)
 Imports:
     MCMCpack
-Collage: 'exp.agenda.vonmon.R'
 Collate:
     'exp.agenda.vonmon.R'
