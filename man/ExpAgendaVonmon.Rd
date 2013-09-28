@@ -1,5 +1,5 @@
-\name{exp.agenda.vonmon}
-\alias{exp.agenda.vonmon}
+\name{ExpAgendaVonmon}
+\alias{ExpAgendaVonmon}
 \title{Bayesian hierarchical expressed agenda model}
 \source{
   Grimmer, J. (2010). A Bayesian Hierarchical Topic Model
@@ -8,13 +8,13 @@
   \url{http://pan.oxfordjournals.org/content/18/1/1.short}.
 }
 \usage{
-  exp.agenda.vonmon(obj = NULL, term.doc = NULL,
+  ExpAgendaVonmon(obj = NULL, term.doc = NULL,
     authors = NULL, n.cats = 10, kappa = 400,
     verbose = TRUE)
 }
 \arguments{
   \item{obj}{an EADTMatrix class object created by
-  \code{\link{PreProsses}} containing the \code{term.doc}
+  \code{\link{PreProcess}} containing the \code{term.doc}
   and \code{authors} matrices. Note \code{term.doc} and
   \code{authors} should not be set independently if
   \code{obj} is specified.}
@@ -46,7 +46,7 @@
   elements: thetas, mus, rs, and alpha.
 }
 \description{
-  \code{exp.agenda.vonmon} implements bayesian hierarchical
+  \code{ExpAgendaVonmon} implements bayesian hierarchical
   topic model for texts from Grimmer (2010).
 }
 
