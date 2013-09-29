@@ -6,12 +6,14 @@
 #' @param TextsCol character string identifying the column in \code{textsDF} with the texts.
 #' @param AuthorCol character string identifying the column in either \code{textsDF} or \code{authorDF} identifying the authors.
 #' @param textsPattern character string. Regular expression pattern identifying the texts in \code{textsDF}. nnecessary if \code{textDF} is set.
-#' @param textsDir character string. A directory containing texts separated into individual text files. Unnecessary if \code{textDF} is set.
 #' @param authorsDF a data frame with author information for each text in \code{textDF}. They must be in the same order. Unnecessary if \code{textDF} is set.
 #' @param removeNumbers logical. Whether or not to remove numbers from the texts.
 #' @param StopWords character vector of stop words to remove. If \code{StopWords = NULL} (the default) then \code{\link{tm}}'s default English stop word list will be used. See \code{\link{stopwords}}.
 #' @param removeAuthors character vector. The names of authors to remove.
 #' @param sparse numeric for the maximal allowed sparsity. See \code{\link{removeSparseTerms}}
+#'
+#' @return Returns an object of class \code{ExpAgendaDTMatrix} that can be used with \code{\link{ExpAgendaVonmon}} to estimated authors' expressed agendas in documents. The object contains two matrices. \code{doc.term} is a document term matrix and \code{authors} locates the authors of the texts in \code{doc.term}. 
+#'  
 #' 
 #' @importFrom tm stopwords
 #' @importFrom tm removeNumbers

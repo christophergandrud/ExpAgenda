@@ -23,10 +23,6 @@
   pattern identifying the texts in \code{textsDF}.
   nnecessary if \code{textDF} is set.}
 
-  \item{textsDir}{character string. A directory containing
-  texts separated into individual text files. Unnecessary
-  if \code{textDF} is set.}
-
   \item{authorsDF}{a data frame with author information for
   each text in \code{textDF}. They must be in the same
   order. Unnecessary if \code{textDF} is set.}
@@ -44,6 +40,14 @@
 
   \item{sparse}{numeric for the maximal allowed sparsity.
   See \code{\link{removeSparseTerms}}}
+}
+\value{
+  Returns an object of class \code{ExpAgendaDTMatrix} that
+  can be used with \code{\link{ExpAgendaVonmon}} to
+  estimated authors' expressed agendas in documents. The
+  object contains two matrices. \code{doc.term} is a
+  document term matrix and \code{authors} locates the
+  authors of the texts in \code{doc.term}.
 }
 \description{
   \code{PreProcess} prepares texts and author information
