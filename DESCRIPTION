@@ -17,6 +17,7 @@ Imports:
     plyr,
     tm
 Collate:
+    'DocTopics.R'
     'ExpAgendaVonmon.R'
     'PreProcess.R'
     'TopicSummary.R'

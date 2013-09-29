@@ -8,8 +8,8 @@
   \item{obj}{an \code{ExpAgendaOut} class object created by
   \code{\link{ExpAgendaVonmon}}.}
 
-  \item{NStems}{numeric. The number of top stems in a
-  topic.}
+  \item{NStems}{numeric. The number of stems with the most
+  mutual information, i.e. the main stems in a topic.}
 }
 \value{
   A data frame with three column: \code{TopicNumber},

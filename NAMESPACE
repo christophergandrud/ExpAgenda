@@ -1,3 +1,4 @@
+export(DocTopics)
 export(ExpAgendaVonmon)
 export(PreProcess)
 export(TopicSummary)
