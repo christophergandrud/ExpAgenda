@@ -12,6 +12,7 @@ Depends:
     R (>= 3.0.0)
 Imports:
     MCMCpack,
+    plyr,
     tm
 Collate:
     'ExpAgendaVonmon.R'

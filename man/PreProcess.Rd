@@ -3,7 +3,7 @@
 \title{Pre-process texts to create a corpus suitable for \code{ExpAgendaVonmon}}
 \usage{
   PreProcess(textsDF = NULL, TextsCol, AuthorCol,
-    textsDir = NULL, textsPattern, authorsDF = NULL,
+    textsPattern = NULL, authorsDF = NULL,
     removeNumbers = TRUE, StopWords = NULL,
     removeAuthors = NULL, sparse = 0.4)
 }

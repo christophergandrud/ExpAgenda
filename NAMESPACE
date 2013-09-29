@@ -1,6 +1,7 @@
 export(ExpAgendaVonmon)
 export(PreProcess)
 import(MCMCpack)
+importFrom(plyr,rename)
 importFrom(tm,Corpus)
 importFrom(tm,DocumentTermMatrix)
 importFrom(tm,removeNumbers)

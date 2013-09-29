@@ -23,39 +23,42 @@
 #' @importFrom tm stemDocument
 #' @importFrom tm DocumentTermMatrix
 #' @importFrom tm removeSparseTerms
+#' @importFrom plyr rename
 #' 
 #' 
 #' @export
 
-PreProcess <- function(textsDF = NULL, TextsCol, AuthorCol, textsDir = NULL, textsPattern, authorsDF = NULL, removeNumbers = TRUE, StopWords = NULL, removeAuthors = NULL, sparse = 0.4){
-  # Determine if textsDF or textsDir/authorsDF is specified
-  if (!is.null(textsDF) & !is.null(textsDir) & !is.null(authorsDF)){
-    stop("Only textsDF or textsDir & authorsDF can be set at once.")
+PreProcess <- function(textsDF = NULL, TextsCol, AuthorCol, textsPattern = NULL, authorsDF = NULL, removeNumbers = TRUE, StopWords = NULL, removeAuthors = NULL, sparse = 0.4){
+  # Determine if textsDF or textsPattern/authorsDF is specified
+  if (!is.null(textsDF) & !is.null(textsPattern) & !is.null(authorsDF)){
+    stop("Only textsDF or textsPattern & authorsDF can be set at once.")
   }
-  if (!is.null(textsDF) & !is.null(textsDir)){
+  if (!is.null(textsDF) & !is.null(textsPattern)){
     stop("term.doc cannot be set if textsDF is also specified.")
   }
   if (!is.null(textsDF) & !is.null(authorsDF)){
     stop("authorsDF cannot be set if textsDF is also specified.")
   }
   
-  if (!is.null(textsDir)){ 
-    Patt <- paste0(textsDir, textsPattern)
-    FileList <- list.files(path = textsDir, pattern = textsPattern)
-    Texts <- lapply(FileList, readLines)
-    TextsV <- as.vector(Texts)
+  if (!is.null(textsPattern)){ 
+    FileList <- list.files(pattern = textsPattern)
+    TextsV <- lapply(FileList, readLines)
   }
-  else if(!is.null(textsDF)){
+  else if (!is.null(textsDF)){
     TextsV <- textDF[, TextsCol]
   }
   
   # Basic clean
+  message("Converting all text to lower case.")
+  TextsV <- tolower(TextsV)
+  message("Removing all punctuation.")
+  TextsV <- removePunctuation(TextsV)
   if (isTRUE(removeNumbers)){
+      message("Removing all numbers.")
       TextsV <- removeNumbers(TextsV)
   }
-  TextsV <- tolower(TextsV)
-  TextsV <- removePunctuation(TextsV)
 
+  message("Removing stop words.")
   if (is.null(StopWords)){
     StopWords <- stopwords(kind = "en")
   }
@@ -63,30 +66,32 @@ PreProcess <- function(textsDF = NULL, TextsCol, AuthorCol, textsDir = NULL, tex
     StopWords <- StopWords
   }
   TextsV <- removeWords(TextsV, StopWords)
+  message("Removing white space.")
   TextsV <- stripWhitespace(TextsV)
   
   if (!is.null(authorsDF)){
-    MetaSub <- authorsDF[, AuthorCol]
+    names <- authorsDF[, AuthorCol]
   }
   else if (!is.null(textsDF)){
-    MetaSub <- textsDF[, AuthorCol]
+    names <- textsDF[, AuthorCol]
   }
   
   # Bind into one data frame
-  Full <- cbind(MetaSub, TextsV)
+  Full <- cbind(names, TextsV)
   
   # Remove specific authors
   if (!is.null(removeAuthors)){
+    message("Dropping unwanted authors.")
     for (i in removeAuthors){
-      Full <- subset(Full, name != i)
+      Full <- subset(Full, names != i)
     }
   }
   #### Create author matrix ####
   # Order by author
-  FullOrd <- Full[order(Full$name), ]
+  FullOrd <- Full[order(Full[, 1]), ]
   
   # Create author matrix
-  AuthorsRaw <- as.data.frame(FullOrd$name)
+  AuthorsRaw <- as.data.frame(FullOrd[, 1])
   AuthorsRaw$ID <- row.names(AuthorsRaw)
   
   First <- by(AuthorsRaw, AuthorsRaw[, 1], head, n = 1)
@@ -97,26 +102,34 @@ PreProcess <- function(textsDF = NULL, TextsCol, AuthorCol, textsDir = NULL, tex
   
   authors <- cbind(First[, 1:2], Last[, 2])
   
-  names(authors) <- c("name", "first", "last")
+  names(authors) <- c("names", "first", "last")
   authors$first <- as.numeric(authors$first)
   authors$last <- as.numeric(as.character(authors$last))
   authors <- as.matrix(authors[, 2:3])
   
   #### Create document term matrix ####
   # Convert to corpus
-  FullCorp <- Corpus(VectorSource(FullOrd$TextsV))
+  FullCorp <- Corpus(VectorSource(FullOrd[, 2]))
   
   # Stemming
+  message("Creating stems.")
   Stems <- tm_map(FullCorp, stemDocument)
   
   # Create term document matrix
   TermDoc <- DocumentTermMatrix(Stems)
   
   # Remove sparse terms
+  message("Removing sparse terms.")
   TermDocS <- removeSparseTerms(TermDoc, sparse)
   
   # Plain matrix
   term.doc <- as.matrix(TermDocS) 
+  
+  # Summarize the data
+  NAuthors <- nrow(authors)
+  NStems <- ncol(term.doc)
+  message(paste("There are", NAuthors, "authors."))
+  message(paste("There are", NStems, "stems."))
   
   # Create ExpAgendaDTMatrix object
   EADTMatrix <- list(authors, term.doc)
