@@ -6,13 +6,20 @@
 #' @param term.doc matrix. Suppose that there are \eqn{D} total documents and \eqn{w} words. \code{term.doc} is a term-document matrix with dimensions: \eqn{D * w}. \code{term.doc} should be sorted by author. Do not set if \code{obj} is specified.
 #' @param authors matrix. If there are \eqn{n} total actors whose attention to issues you would like to measure. \code{author} is an \eqn{n * 2} matrix. The first column specifies the first document in the term-document matrix that was authored by a given author. The second column specifies the last document authored. Do not set if \code{obj} is specified.
 #' @param n.cats numeric. Sets the number of components (topics) in the mixture model. The default is 10.
-#' @param kappa
+#' @param kappa numeric. Distribution's dispersion [CHECK].
 #' @param verbose logical. Whether or not to print out each iteration.
 #'
 #' @source Grimmer, J. (2010). A Bayesian Hierarchical Topic Model for Political Texts: Measuring Expressed Agendas in Senate Press Releases. Political Analysis, 18, 1-35. \url{http://pan.oxfordjournals.org/content/18/1/1.short}.
 #' 
 #' @return
-#' A \code{ExpAgendaOut} object. The object contains four elements: thetas, mus, rs, and alpha.
+#' A \code{ExpAgendaOut} object. The object contains four elements: thetas, mus, rs, and alpha. \code{thetas} are [FILL IN]. \code{mus} are location on the unit hyperspace where the vMF distribution reaches its mode for each stem [CHECK]. \code{rs} are the probability of document \eqn{j} from author \eqn{i} being from topic \eqn{k}. \code{alphas} are the prior distributions of the topics.
+#' 
+#'
+#'
+#'
+#'
+#'
+#'
 #' 
 #' @import MCMCpack
 #' 

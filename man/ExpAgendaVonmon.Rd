@@ -36,14 +36,19 @@
   \item{n.cats}{numeric. Sets the number of components
   (topics) in the mixture model. The default is 10.}
 
-  \item{kappa}{}
+  \item{kappa}{numeric. Distribution's dispersion [CHECK].}
 
   \item{verbose}{logical. Whether or not to print out each
   iteration.}
 }
 \value{
   A \code{ExpAgendaOut} object. The object contains four
-  elements: thetas, mus, rs, and alpha.
+  elements: thetas, mus, rs, and alpha. \code{thetas} are
+  [FILL IN]. \code{mus} are location on the unit hyperspace
+  where the vMF distribution reaches its mode for each stem
+  [CHECK]. \code{rs} are the probability of document
+  \eqn{j} from author \eqn{i} being from topic \eqn{k}.
+  \code{alphas} are the prior distributions of the topics.
 }
 \description{
   \code{ExpAgendaVonmon} implements bayesian hierarchical
