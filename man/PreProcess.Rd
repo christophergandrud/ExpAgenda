@@ -1,6 +1,12 @@
 \name{PreProcess}
 \alias{PreProcess}
 \title{Pre-process texts to create a corpus suitable for \code{ExpAgendaVonmon}}
+\source{
+  Feinerer, K. Hornik, and D. Meyer. Text mining
+  infrastructure in R. Journal of Statistical Software,
+  25(5):1-54, March 2008.
+  \url{http://www.jstatsoft.org/v25/i05}.
+}
 \usage{
   PreProcess(textsDF = NULL, TextsCol, AuthorCol,
     textsPattern = NULL, authorsDF = NULL,

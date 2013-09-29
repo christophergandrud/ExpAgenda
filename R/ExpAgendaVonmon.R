@@ -37,7 +37,7 @@ ExpAgendaVonmon <- function(obj = NULL, term.doc = NULL, authors = NULL, n.cats 
     stop("authors cannot be set if obj is also specified.")
   }
   
-  # Extract matrixes from obj
+  # Extract matrices from obj
   if (!is.null(obj) & class(obj) != "ExpAgendaDTMatrix"){
     stop("obj must be of class ExpAgendaDTMatrix and created by PreProsses.")
   }

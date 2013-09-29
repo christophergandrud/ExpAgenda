@@ -1,6 +1,8 @@
 export(ExpAgendaVonmon)
 export(PreProcess)
+export(TopicSummary)
 import(MCMCpack)
+importFrom(DataCombine,MoveFront)
 importFrom(plyr,rename)
 importFrom(tm,Corpus)
 importFrom(tm,DocumentTermMatrix)

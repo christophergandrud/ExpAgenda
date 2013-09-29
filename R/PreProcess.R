@@ -15,6 +15,8 @@
 #' @return Returns an object of class \code{ExpAgendaDTMatrix} that can be used with \code{\link{ExpAgendaVonmon}} to estimated authors' expressed agendas in documents. The object contains two matrices. \code{doc.term} is a document term matrix and \code{authors} locates the authors of the texts in \code{doc.term}. 
 #'  
 #' 
+#' @source Feinerer, K. Hornik, and D. Meyer. Text mining infrastructure in R. Journal of Statistical Software, 25(5):1-54, March 2008. \url{http://www.jstatsoft.org/v25/i05}.
+#' 
 #' @importFrom tm stopwords
 #' @importFrom tm removeNumbers
 #' @importFrom tm removePunctuation
