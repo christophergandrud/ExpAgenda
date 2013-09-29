@@ -32,8 +32,8 @@
 
   \item{StopWords}{character vector of stop words to
   remove. If \code{StopWords = NULL} (the default) then
-  \code{\link{tm}}'s default English stop word list will be
-  used. See \code{\link{stopwords}}.}
+  \code{tm}'s default English stop word list will be used.
+  See \code{\link{stopwords}}.}
 
   \item{removeAuthors}{character vector. The names of
   authors to remove.}
