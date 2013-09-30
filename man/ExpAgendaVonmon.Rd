@@ -42,13 +42,16 @@
   iteration.}
 }
 \value{
-  A \code{ExpAgendaOut} object. The object contains four
-  elements: thetas, mus, rs, and alpha. \code{thetas} are
+  A \code{ExpAgendaOut} object. The object contains five
+  elements: \code{thetas}, \code{mus}, \code{rs},
+  \code{alpha}, and \code{authorID}. \code{thetas} are
   [FILL IN]. \code{mus} are location on the unit hyperspace
   where the vMF distribution reaches its mode for each stem
   [CHECK]. \code{rs} are the probability of document
   \eqn{j} from author \eqn{i} being from topic \eqn{k}.
   \code{alphas} are the prior distributions of the topics.
+  \code{authorID} is used for \code{\link{DocTopics}} to
+  return the documents their their original order.
 }
 \description{
   \code{ExpAgendaVonmon} implements bayesian hierarchical

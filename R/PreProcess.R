@@ -12,7 +12,7 @@
 #' @param removeAuthors character vector. The names of authors to remove.
 #' @param sparse numeric for the maximal allowed sparsity. See \code{\link{removeSparseTerms}}
 #'
-#' @return Returns an object of class \code{ExpAgendaDTMatrix} that can be used with \code{\link{ExpAgendaVonmon}} to estimated authors' expressed agendas in documents. The object contains two matrices. \code{doc.term} is a document term matrix and \code{authors} locates the authors of the texts in \code{doc.term}. 
+#' @return Returns an object of class \code{ExpAgendaDTMatrix} that can be used with \code{\link{ExpAgendaVonmon}} to estimated authors' expressed agendas in documents. The object contains three matrices. \code{doc.term} is a document term matrix and \code{authors} locates the authors of the texts in \code{doc.term}. \code{authorID} is used for \code{\link{DocTopics}} to return the documents their their original order.
 #'  
 #' 
 #' @source Feinerer, K. Hornik, and D. Meyer. Text mining infrastructure in R. Journal of Statistical Software, 25(5):1-54, March 2008. \url{http://www.jstatsoft.org/v25/i05}.
@@ -92,10 +92,16 @@ PreProcess <- function(textsDF = NULL, TextsCol, AuthorCol, textsPattern = NULL,
       Full <- subset(Full, names != i)
     }
   }
-  #### Create author matrix ####
+  #### Create author matrix short ####
   # Order by author
-  FullOrd <- Full[order(Full[, 1]), ]
+  ID <- 1:nrow(Full)
+  Full <- cbind(ID, Full)
+  FullOrd <- Full[order(Full[, 2]), ]
   
+  #### Create author matrix long ####
+  authorID <- FullOrd[, 1:2]
+  FullOrd <- FullOrd[, -1] 
+
   # Create author matrix
   AuthorsRaw <- as.data.frame(FullOrd[, 1])
   AuthorsRaw$ID <- row.names(AuthorsRaw)
@@ -138,8 +144,8 @@ PreProcess <- function(textsDF = NULL, TextsCol, AuthorCol, textsPattern = NULL,
   message(paste("There are", NStems, "stems."))
   
   # Create ExpAgendaDTMatrix object
-  EADTMatrix <- list(authors, term.doc)
-  names(EADTMatrix) <- c("authors", "term.doc")
+  EADTMatrix <- list(authors, term.doc, authorID)
+  names(EADTMatrix) <- c("authors", "term.doc", "authorID")
   class(EADTMatrix) <- "ExpAgendaDTMatrix"
   return(EADTMatrix)
 }

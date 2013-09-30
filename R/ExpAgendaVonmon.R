@@ -12,13 +12,8 @@
 #' @source Grimmer, J. (2010). A Bayesian Hierarchical Topic Model for Political Texts: Measuring Expressed Agendas in Senate Press Releases. Political Analysis, 18, 1-35. \url{http://pan.oxfordjournals.org/content/18/1/1.short}.
 #' 
 #' @return
-#' A \code{ExpAgendaOut} object. The object contains four elements: thetas, mus, rs, and alpha. \code{thetas} are [FILL IN]. \code{mus} are location on the unit hyperspace where the vMF distribution reaches its mode for each stem [CHECK]. \code{rs} are the probability of document \eqn{j} from author \eqn{i} being from topic \eqn{k}. \code{alphas} are the prior distributions of the topics.
+#' A \code{ExpAgendaOut} object. The object contains five elements: \code{thetas}, \code{mus}, \code{rs}, \code{alpha}, and \code{authorID}. \code{thetas} are [FILL IN]. \code{mus} are location on the unit hyperspace where the vMF distribution reaches its mode for each stem [CHECK]. \code{rs} are the probability of document \eqn{j} from author \eqn{i} being from topic \eqn{k}. \code{alphas} are the prior distributions of the topics. \code{authorID} is used for \code{\link{DocTopics}} to return the documents their their original order.
 #' 
-#'
-#'
-#'
-#'
-#'
 #'
 #' 
 #' @import MCMCpack
@@ -206,8 +201,9 @@ ExpAgendaVonmon <- function(obj = NULL, term.doc = NULL, authors = NULL, n.cats 
       cat('next iteration', '\n')}
   }
   
-  out <- list(pis, mus, taus, thetas)
-  names(out) <- c('thetas', 'mus', 'rs', 'alpha')
+  authorID <- obj$authorID
+  out <- list(pis, mus, taus, thetas, authorID)
+  names(out) <- c('thetas', 'mus', 'rs', 'alpha', 'authorID')
   class(out) <- "ExpAgendaOut"
   return(out)
 }

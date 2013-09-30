@@ -51,9 +51,11 @@
   Returns an object of class \code{ExpAgendaDTMatrix} that
   can be used with \code{\link{ExpAgendaVonmon}} to
   estimated authors' expressed agendas in documents. The
-  object contains two matrices. \code{doc.term} is a
+  object contains three matrices. \code{doc.term} is a
   document term matrix and \code{authors} locates the
-  authors of the texts in \code{doc.term}.
+  authors of the texts in \code{doc.term}. \code{authorID}
+  is used for \code{\link{DocTopics}} to return the
+  documents their their original order.
 }
 \description{
   \code{PreProcess} prepares texts and author information

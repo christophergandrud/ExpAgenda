@@ -5,7 +5,7 @@
 #' @param obj an \code{ExpAgendaOut} class object created by \code{\link{ExpAgendaVonmon}}.
 #' @param NStems numeric. The number of stems with the most mutual information, i.e. the main stems in a topic.
 #' 
-#' @return A data frame with three column: \code{TopicNumber}, \code{Stems}, and \code{Mus}.
+#' @return A data frame with three columns: \code{TopicNumber}, \code{Stems}, and \code{Mus}.
 #' 
 #' @importFrom DataCombine MoveFront
 #' 

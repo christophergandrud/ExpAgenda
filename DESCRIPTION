@@ -15,6 +15,7 @@ Imports:
     DataCombine,
     MCMCpack,
     plyr,
+    reshape2,
     tm
 Collate:
     'DocTopics.R'

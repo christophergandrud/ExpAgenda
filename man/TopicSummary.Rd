@@ -12,7 +12,7 @@
   mutual information, i.e. the main stems in a topic.}
 }
 \value{
-  A data frame with three column: \code{TopicNumber},
+  A data frame with three columns: \code{TopicNumber},
   \code{Stems}, and \code{Mus}.
 }
 \description{
