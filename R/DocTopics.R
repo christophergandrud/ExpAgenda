@@ -35,5 +35,8 @@ DocTopics <- function(obj, TopicLabels = NULL){
   OutDF$Topic <- as.numeric(gsub(pattern = "V", replacement = "", OutDF$Topic))
   OutDF$Topic <- OutDF$Topic - 2
 
+  if (!is.null(TopicLabels)){
+  	OutDF$Topic <- factor(OutDF$Topic, labels = TopicLabels)
+  }
   OutDF
 }
