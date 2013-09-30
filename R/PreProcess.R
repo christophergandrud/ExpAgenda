@@ -22,6 +22,7 @@
 #' @importFrom tm removePunctuation
 #' @importFrom tm removeWords
 #' @importFrom tm stripWhitespace
+#' @importFrom tm VectorSource
 #' @importFrom tm Corpus
 #' @importFrom tm tm_map
 #' @importFrom tm stemDocument
