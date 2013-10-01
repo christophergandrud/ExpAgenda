@@ -43,7 +43,8 @@ ExpAgendaVonmon <- function(obj = NULL, term.doc = NULL, authors = NULL, n.cats 
   
   # Stop if an author only has one observation
   if (any(authors[, 1] - authors[, 2] == 0)){
-    stop("One or more of the authors have only one text. Please remove the author before proceeding.")
+    OneDoc <- subset(authors, authors[, 1] == authors[, 2])
+    stop("The following authors have only one text. Please remove the author before proceeding.\n\n", paste(row.names(OneDoc), collapse = "\n"))
   }
   
   ## the likelihood for the dirichlet component of the model
