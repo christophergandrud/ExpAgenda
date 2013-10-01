@@ -88,9 +88,7 @@ PreProcess <- function(textsDF = NULL, TextsCol, AuthorCol, textsPattern = NULL,
   # Remove specific authors
   if (!is.null(removeAuthors)){
     message("Dropping unwanted authors.")
-    for (i in removeAuthors){
-      Full <- subset(Full, names != i)
-    }
+    Full <- Full[!Full[, 1] %in% removeAuthors, ]
   }
   #### Create author matrix short ####
   # Order by author
