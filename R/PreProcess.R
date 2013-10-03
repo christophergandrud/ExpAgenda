@@ -5,6 +5,7 @@
 #' @param textsDF a data frame containing a column with texts and a column with author names. Unnecessary if \code{textsDir} and \code{authorsDF} are set.
 #' @param TextsCol character string identifying the column in \code{textsDF} with the texts.
 #' @param AuthorCol character string identifying the column in either \code{textsDF} or \code{authorDF} identifying the authors.
+#' @param IDCol a character string with the column uniquely identifying each text either in \code{textsDF} or \code{authorDF}.
 #' @param textsPattern character string. Regular expression pattern identifying the texts in \code{textsDF}. nnecessary if \code{textDF} is set.
 #' @param authorsDF a data frame with author information for each text in \code{textDF}. They must be in the same order. Unnecessary if \code{textDF} is set.
 #' @param removeNumbers logical. Whether or not to remove numbers from the texts.
@@ -33,7 +34,7 @@
 #' 
 #' @export
 
-PreProcess <- function(textsDF = NULL, TextsCol, AuthorCol, textsPattern = NULL, authorsDF = NULL, removeNumbers = TRUE, StopWords = NULL, removeAuthors = NULL, sparse = 0.4){
+PreProcess <- function(textsDF = NULL, TextsCol, AuthorCol, IDCol, textsPattern = NULL, authorsDF = NULL, removeNumbers = TRUE, StopWords = NULL, removeAuthors = NULL, sparse = 0.4){
   textDF <- VectorSource <- NULL
   # Determine if textsDF or textsPattern/authorsDF is specified
   if (!is.null(textsDF) & !is.null(textsPattern) & !is.null(authorsDF)){
@@ -79,7 +80,7 @@ PreProcess <- function(textsDF = NULL, TextsCol, AuthorCol, textsPattern = NULL,
     names <- authorsDF[, AuthorCol]
   }
   else if (!is.null(textsDF)){
-    names <- textsDF[, AuthorCol]
+    names <- textsDF[, c(AuthorCol, IDCol)]
   }
   
   # Bind into one data frame
@@ -93,8 +94,9 @@ PreProcess <- function(textsDF = NULL, TextsCol, AuthorCol, textsPattern = NULL,
   #### Create author matrix short ####
   # Order by author
   ID <- 1:nrow(Full)
-  Full <- cbind(ID, Full)
-  FullOrd <- Full[order(Full[, 2]), ]
+  Full <- as.data.frame(cbind(ID, Full))
+  Full[, 1] <- as.numeric(as.character(Full[, 1]))
+  FullOrd <- Full[order(Full[, 2], Full[, 1]), ]
   
   #### Create author matrix long ####
   authorID <- FullOrd[, 1:2]

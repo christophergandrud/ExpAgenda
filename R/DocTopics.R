@@ -33,7 +33,8 @@ DocTopics <- function(obj, TopicLabels = "auto", StemLabel = 2){
   OutDF <- OutDF[, 1:3]
   row.names(OutDF) <- NULL
   names(OutDF) <- c("ID", "Names", "Topic")
-  OutDF$Topic <- as.numeric(gsub(pattern = "V", replacement = "", OutDF$Topic))
+  OutDF$Topic <- as.character(OutDF$Topic)
+  OutDF$Topic <- as.numeric(substring(OutDF$Topic, 2))
   OutDF$Topic <- OutDF$Topic - 2
 
   if (TopicLabels == "auto"){

@@ -1,9 +1,8 @@
 Package: ExpAgenda
-Title: Bayesian hierarchical expressed agenda estimation
+Title: Bayesian hierarchical expressed agenda estimation using Grimmer (2010)
 Version: 0.1
-Date: 2013-09-29
-Author: Christopher Gandrud and based on considerable source code from Justin
-    Grimmer
+Date: 2013-10-01
+Author: Christopher Gandrud
 Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>
 BugReports: https://github.com/christophergandrud/ExpAgenda/issues
 Description: A bayesian hierarchical topic model for texts. The package

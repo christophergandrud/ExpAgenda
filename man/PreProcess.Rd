@@ -8,7 +8,7 @@
   \url{http://www.jstatsoft.org/v25/i05}.
 }
 \usage{
-  PreProcess(textsDF = NULL, TextsCol, AuthorCol,
+  PreProcess(textsDF = NULL, TextsCol, AuthorCol, IDCol,
     textsPattern = NULL, authorsDF = NULL,
     removeNumbers = TRUE, StopWords = NULL,
     removeAuthors = NULL, sparse = 0.4)
@@ -24,6 +24,10 @@
   \item{AuthorCol}{character string identifying the column
   in either \code{textsDF} or \code{authorDF} identifying
   the authors.}
+
+  \item{IDCol}{a character string with the column uniquely
+  identifying each text either in \code{textsDF} or
+  \code{authorDF}.}
 
   \item{textsPattern}{character string. Regular expression
   pattern identifying the texts in \code{textsDF}.
